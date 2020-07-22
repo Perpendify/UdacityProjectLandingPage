@@ -80,8 +80,8 @@ section {
     float: left;
 }
 
-.navbar__menu li.active {
-    background-color: red;
+.navbar__menu li.your-active-class {
+    background-color: black;
 }
 
 .navbar__menu .menu__link a{

@@ -13,16 +13,13 @@
  * 
 */
 
-// Build menu 
-
-
 const sectionTag = document.querySelectorAll('section'); 
       
+// Build Nav Bar
 const generateNav = () => {
-    // This function creates the nav bar based on ID names of the different sections 
+    // This function creates the nav bar based on 'data-nav' of the different sections 
 
     // Obtaining all section tags 
-
     // Start for loop according to the number of sections 
     for (i=0; i < sectionTag.length; i++) {
 
@@ -73,33 +70,34 @@ const topFunction = () => {
 const sectionHeight = (section) => section.getBoundingClientRect().top;
 
 // removeActive will remove active state when not inviewport
-const removeActive = (section, navSection) => {
+const removeActive = (section,navSection) => {
     section.classList.remove('your-active-class');
+    navSection.classList.remove('your-active-class');
 };
 
 // addActive will add active state when entering inviewport. Condition given if in view port
 const addActive = (conditional, section, navSection) => {
     if (conditional) {
         section.classList.add('your-active-class');
+        navSection.classList.add('your-active-class');
     }
 };
 
 // function to determine if section is in active state 
 const sectionActive = () => {
-    //for each section
-    sectionTag.forEach(
-        section => { 
-            // height is hgith of section
-            const height = sectionHeight(section);
 
-            inviewport = () => height < 200 && height >= -200;
+    for (i=0; i < sectionTag.length; i++) {
+        const section = sectionTag.item(i);
+        // height is hgith of section
+        const height = sectionHeight(section);
+        const navSection = document.querySelectorAll('li').item(i);
+        
+        inviewport = () => height < 200 && height >= -200;
 
-            removeActive(section);
-            addActive(inviewport(), section);
+        removeActive(section, navSection);
+        addActive(inviewport(), section, navSection);
+    }
 
-        }
-    )
 }
 
-// Event listener to track scroll movement, and run function sectionActive
 window.addEventListener('scroll', sectionActive);
